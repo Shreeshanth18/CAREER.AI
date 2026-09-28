@@ -1,4 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CareerOS
+
+An AI career copilot for mapping evidence to a target role, building a learning plan, practicing skills, and comparing a profile with job descriptions.
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+The app works in local-demo mode without API credentials. Profile changes are saved in this browser.
+
+## Connect Gemini
+
+Copy `.env.example` to `.env.local` and set `GEMINI_API_KEY`. The key is used only by the server route at `/api/coach`; it is never exposed to the browser. The app uses Gemini for resume evidence extraction, job-description comparison, project planning, and interview feedback. If the key is missing, the app uses a clearly labeled local keyword scan where applicable.
+
+## Connect Supabase
+
+1. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local`.
+2. Enable anonymous sign-ins in the Supabase Auth settings.
+3. Run `supabase/schema.sql` in the Supabase SQL editor.
+
+The browser creates an anonymous Supabase user and the table's row-level security policy restricts each profile to that user. Without these settings, the app remains local-first.
+
+## Trust and scoring
+
+Resume skill percentages are AI-estimated proficiency signals based on evidence, not objective measurements. Assessment history is shown separately as progress evidence. Job-match percentages describe overlap with the specific pasted description and are not a prediction of hiring outcomes. This MVP does not claim live job-market monitoring or execute submitted code.
 
 ## Getting Started
 
